@@ -1,0 +1,20 @@
+# resource budget per component
+minio:
+  cpus: 0.50
+  memory: 512m
+
+keeper:
+  cpus: 0.50
+  memory: 512m
+
+clickhouse:
+  cpus: 6.00
+  memory: 12g
+
+clickhouse-migrations:
+  cpus: 1.00
+  memory: 1g
+
+duckdb:
+  threads: 6
+  memory: 12g

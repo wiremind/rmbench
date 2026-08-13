@@ -1,0 +1,5 @@
+# DuckDB is embedded, so there is no engine container
+name: benchmark
+
+include:
+  - ../compose.yaml

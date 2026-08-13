@@ -1,0 +1,76 @@
+name: benchmark
+
+include:
+  - ../compose.yaml
+
+services:
+  keeper:
+    image: clickhouse/clickhouse-keeper:25.8.2.29@sha256:6e5934512425ec1f7faec703fef5ea5e5b2d8355e03d83ee5127e8683969f0d7
+    hostname: keeper
+    cpus: ${KEEPER_CPUS}
+    mem_limit: ${KEEPER_MEMORY}
+    memswap_limit: ${KEEPER_MEMORY}
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - keeper_data:/var/lib/clickhouse/coordination
+      - type: bind
+        source: ./config/keeper/keeper_config.xml
+        target: /etc/clickhouse-keeper/keeper_config.xml
+        read_only: true
+
+  clickhouse:
+    hostname: clickhouse
+    image: clickhouse/clickhouse-server:25.8.2.29@sha256:74c213b4d4cb4854c2497694df0c2d153c041003eadbb0457ae62c28cb8d723f
+    cpus: ${CLICKHOUSE_CPUS}
+    mem_limit: ${CLICKHOUSE_MEMORY}
+    memswap_limit: ${CLICKHOUSE_MEMORY}
+    depends_on:
+      - keeper
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      CLICKHOUSE_ALWAYS_RUN_INITDB_SCRIPTS: "true"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - type: bind
+        source: ./config/config.d
+        target: /etc/clickhouse-server/config.d
+        read_only: true
+      - type: bind
+        source: ./config/users.d
+        target: /etc/clickhouse-server/users.d
+        read_only: true
+      - type: bind
+        source: ./initdb
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-client --user benchmark --password benchmark --database default -q \"EXISTS DATABASE rmbench\" | grep -qx 1"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 5s
+
+  clickhouse-migrations:
+    build:
+      context: .
+      dockerfile: migrations.Dockerfile
+    cpus: ${CLICKHOUSE_MIGRATIONS_CPUS}
+    mem_limit: ${CLICKHOUSE_MIGRATIONS_MEMORY}
+    memswap_limit: ${CLICKHOUSE_MIGRATIONS_MEMORY}
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  keeper_data:
+  clickhouse_data:

@@ -1,0 +1,51 @@
+# Generator tuning. Values calibrated from the source dataset live in the
+# calibration bundle, not here; this file holds only generation-side settings.
+
+# Base table row count at SF1. Other tables scale by bundle.cross_table.row_count_ratios.
+row_scaling:
+  sf1_od_row_count: 814454
+  default_chunk_size: 50000
+  default_seed: 42
+  # gz member size; each member is hydrated by one parallel worker
+  member_target_rows: 250000
+
+# Entity pool behaviour. Pool sizes are not set here, they derive from bundle.entity_cardinality.
+entity_pools:
+  # Entities whose count is linear in departure_days, sized from the
+  # per-departure-day rate rather than the log-SF curve. Two windows may share a
+  # scale factor but differ in departure days, so SF alone does not determine them.
+  departure_linear: [od, leg]
+
+# Synthetic durations (seconds)
+durations:
+  service:
+    min_seconds: 1800     # 30 minutes
+    max_seconds: 28800    # 8 hours
+  leg:
+    min_seconds: 300      # 5 minutes
+    max_seconds: 10800    # 3 hours
+  intra_day:
+    low_seconds: 14400    # 04:00
+    high_seconds: 82800   # 23:00
+
+# These columns emit fixed, readable names instead of generated tokens
+# (EVENT_TYPE_0001). Each name takes the next most frequent category; categories
+# past the end of the list fall back to tokens.
+literal_values:
+  event_type: [PURCHASE, CANCEL, HOLD]
+  service_status: [OPEN, LIMITED, CLOSED]
+  od_status: [OPEN]
+
+# FOR DEBUGGING:
+# Leave-one-out toggles for ablation. Setting a flag false disables that
+# technique and falls back to independent sampling, so its marginal contribution
+# to fidelity can be measured. All true is the full generator.
+ablation:
+  family_of_bucket: true    # each bucket maps to one family, else drawn independently
+  cabin_subset: true        # per-route cabin subset, else the full cabin ladder
+  constraints: true         # row-level rules from constraints.yaml
+  pax_dedupe: true          # rows sharing a storage key get distinct bookings
+  metric_grid: true         # snap metrics to the calibrated distinct-value grid
+  per_rung: true            # rung attributes shared across a parent's children
+  market_of_route: true     # markets partitioned across routes, else drawn independently
+  shared_entity_pools: true # one entity pool across tables, else per-table pools

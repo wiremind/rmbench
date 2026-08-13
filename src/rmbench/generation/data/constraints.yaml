@@ -1,0 +1,70 @@
+# Structural rules the generator applies on top of column-level sampling.
+
+# child -> parent. Parent-bound columns stay constant across a child's rows.
+entity_hierarchy:
+  od: service
+  leg: service
+
+# Per-slice fan-out. Each primary entity is expanded over a ladder of
+# (fan_out...) tuples, and (primary, fan_out...) is unique within a slice.
+#
+#   per_rung: drawn once per (parent, ladder position) and shared by every child
+#             of that parent, for attributes that belong to the ladder position
+#             rather than to the individual row.
+#
+# fact_passenger_event has no fan-out: its key is made unique by redrawing
+# ticket_key on collision instead.
+fanout:
+  fact_daily_od_bucket:
+    primary: od
+    fan_out: [cabin_name, family_name, bucket_name]
+    # bucket-level attributes: price, availability windows, and the flags that
+    # describe the bucket's state at a snapshot rather than the row's
+    per_rung: [price_vat_inc,
+               bucket_authorization_start_day, bucket_authorization_end_day,
+               availability_start_day, availability_end_day,
+               cumul_availability_start_day, cumul_availability_end_day,
+               is_first_available_start_day, is_first_available_end_day,
+               has_pricing_changed_bucket, is_optim_current]
+  fact_daily_leg_physical_inventory:
+    primary: leg
+    fan_out: [cabin_name, physical_inventory_name]
+    per_rung: [physical_availability_start_day, physical_availability_end_day]
+
+# Row-level rules, applied slice-wide in declared order (pointer before carry on
+# the same key). Kinds:
+#   pointer   : set exactly one row per group true on a bool column
+#   carry     : copy columns from the flagged row onto every row of its group
+#   share     : collapse columns to a single value per group
+#   coherence : per-row relation between two columns (clip_upper: target <= by)
+tables:
+  fact_daily_od_bucket:
+    - {kind: pointer, key: [service_id, day_x], column: service_pointer}
+    - {kind: pointer, key: [service_id, od_id, cabin_name, day_x], column: od_cabin_pointer,
+       choose_by: [family_name, bucket_name]}
+    - {kind: coherence, target: cabin_lid,   op: clip_upper, by: cabin_capacity}
+    - {kind: coherence, target: od_cabin_forecasted_traffic, op: clip_upper, by: cabin_capacity}
+    - {kind: coherence, target: od_cabin_optimized_traffic,  op: clip_upper, by: cabin_capacity}
+    - {kind: coherence, target: od_cabin_last_observed,      op: clip_upper, by: cabin_capacity}
+    - {kind: coherence, target: service_lid, op: clip_upper, by: service_capacity}
+    - {kind: coherence, target: availability_end_day,        op: clip_upper, by: availability_start_day}
+    - {kind: coherence, target: cumul_availability_end_day,  op: clip_upper, by: cumul_availability_start_day}
+
+  fact_daily_leg_physical_inventory:
+    # cabin-level quantities, computed once per (leg, cabin) and reused by every
+    # physical inventory in that cabin
+    - {kind: share, key: [leg_id, cabin_name, day_x],
+       columns: [forecast_full_day_x, optimization_full_day_x,
+                 unconstrained_demand_bookings, unconstrained_forecast_bookings,
+                 final_forecast_bookings]}
+    - {kind: pointer, key: [service_number, service_departure_date, day_x], column: is_service_max_leg}
+    - {kind: pointer, key: [service_number, service_departure_date, day_x], column: is_service_peak_leg}
+    - {kind: carry,   key: [service_number, service_departure_date, day_x],
+       where: is_service_max_leg,
+       from_columns: [leg_origin_station_name, leg_destination_station_name],
+       to_columns:   [service_max_leg_origin_station_name, service_max_leg_destination_station_name]}
+    - {kind: coherence, target: physical_inventory_lid,        op: clip_upper, by: physical_inventory_capacity}
+    - {kind: coherence, target: physical_availability_end_day, op: clip_upper, by: physical_availability_start_day}
+
+  fact_passenger_event:
+    - {kind: coherence, target: cabin_lid, op: clip_upper, by: cabin_capacity}

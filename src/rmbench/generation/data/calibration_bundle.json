@@ -1,0 +1,3066 @@
+{
+  "cardinality_anchors": {
+    "departure_days_hi": 100,
+    "departure_days_lo": 1,
+    "method": "uniq (HLL, ~1% error), no FINAL, per anchor window",
+    "sf_hi": 9445.591342175248,
+    "sf_lo": 1.0
+  },
+  "cross_table": {
+    "base_table": "fact_daily_od_bucket",
+    "row_count_ratios": {
+      "fact_daily_leg_physical_inventory": 0.040905130136937064,
+      "fact_passenger_event": 0.007018444034864281
+    }
+  },
+  "entity_cardinality": {
+    "booking": {
+      "hi": 14267958,
+      "lo": 4933
+    },
+    "leg": {
+      "hi": 352264,
+      "lo": 3490
+    },
+    "market": {
+      "hi": 412,
+      "lo": 364
+    },
+    "od": {
+      "hi": 1207556,
+      "lo": 11849
+    },
+    "service": {
+      "hi": 1421,
+      "lo": 832
+    }
+  },
+  "sf_anchor": {
+    "departure_start": "2020-01-31",
+    "sale_start": "2020-01-01"
+  },
+  "sf_catalog": {
+    "1": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 1
+    },
+    "10": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 10
+    },
+    "100": {
+      "booking_offset_days": 37,
+      "departure_days": 4,
+      "sale_days": 25
+    },
+    "10000": {
+      "booking_offset_days": 99,
+      "departure_days": 100,
+      "sale_days": 100
+    },
+    "2": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 2
+    },
+    "20": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 20
+    },
+    "250": {
+      "booking_offset_days": 70,
+      "departure_days": 5,
+      "sale_days": 50
+    },
+    "3": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 3
+    },
+    "5": {
+      "booking_offset_days": 31,
+      "departure_days": 1,
+      "sale_days": 5
+    }
+  },
+  "tables": {
+    "fact_daily_leg_physical_inventory": {
+      "array_profiles": {
+        "leg_list_alerts": {
+          "null_rate": 0.6206117209537961
+        },
+        "service_labels": {
+          "null_rate": 0.11572139095776751
+        }
+      },
+      "bool_profiles": {
+        "is_last": {
+          "true_rate": {
+            "hi": 0.0,
+            "lo": 0.0
+          }
+        }
+      },
+      "category_distributions": {
+        "cabin_name": {
+          "distinct_count": {
+            "hi": 7,
+            "lo": 7
+          },
+          "tail_distinct_count": {
+            "hi": 3,
+            "lo": 3
+          },
+          "tail_share_sum": 0.009812154724729072,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000065",
+              "share": 0.4872866905294916
+            },
+            {
+              "category_id": "cat_000066",
+              "share": 0.423986844142344
+            },
+            {
+              "category_id": "cat_000067",
+              "share": 0.07097664348385473
+            },
+            {
+              "category_id": "cat_000156",
+              "share": 0.007937667119580676
+            }
+          ]
+        },
+        "leg_status": {
+          "distinct_count": {
+            "hi": 3,
+            "lo": 2
+          },
+          "tail_distinct_count": {
+            "hi": 1,
+            "lo": 0
+          },
+          "tail_share_sum": 0.00019665500201471176,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000157",
+              "share": 0.9492071253929196
+            },
+            {
+              "category_id": "cat_000158",
+              "share": 0.05059621960506565
+            }
+          ]
+        },
+        "physical_inventory_name": {
+          "distinct_count": {
+            "hi": 43,
+            "lo": 33
+          },
+          "tail_distinct_count": {
+            "hi": 25,
+            "lo": 15
+          },
+          "tail_share_sum": 0.027845952623706705,
+          "tail_zipf_exponent": 1.7951144178211853,
+          "top_values": [
+            {
+              "category_id": "cat_000159",
+              "share": 0.09955602665076138
+            },
+            {
+              "category_id": "cat_000160",
+              "share": 0.09955602665076138
+            },
+            {
+              "category_id": "cat_000161",
+              "share": 0.09097480602153481
+            },
+            {
+              "category_id": "cat_000162",
+              "share": 0.0880831268906249
+            },
+            {
+              "category_id": "cat_000163",
+              "share": 0.08154608398103971
+            },
+            {
+              "category_id": "cat_000164",
+              "share": 0.08055545741532923
+            },
+            {
+              "category_id": "cat_000165",
+              "share": 0.0712012756342555
+            },
+            {
+              "category_id": "cat_000166",
+              "share": 0.0712012756342555
+            },
+            {
+              "category_id": "cat_000167",
+              "share": 0.06811379467993478
+            },
+            {
+              "category_id": "cat_000168",
+              "share": 0.06811379467993478
+            },
+            {
+              "category_id": "cat_000169",
+              "share": 0.041485771399115134
+            },
+            {
+              "category_id": "cat_000170",
+              "share": 0.03651619088678945
+            },
+            {
+              "category_id": "cat_000171",
+              "share": 0.017083317830219
+            },
+            {
+              "category_id": "cat_000172",
+              "share": 0.017083317830219
+            },
+            {
+              "category_id": "cat_000173",
+              "share": 0.017083317830219
+            },
+            {
+              "category_id": "cat_000174",
+              "share": 0.01064663183137242
+            },
+            {
+              "category_id": "cat_000175",
+              "share": 0.007937667119580676
+            },
+            {
+              "category_id": "cat_000176",
+              "share": 0.00541616441034668
+            }
+          ]
+        },
+        "route_name": {
+          "distinct_count": {
+            "hi": 102,
+            "lo": 98
+          },
+          "tail_distinct_count": {
+            "hi": 70,
+            "lo": 66
+          },
+          "tail_share_sum": 0.3614373016827438,
+          "tail_zipf_exponent": 1.0468863187042272,
+          "top_values": [
+            {
+              "category_id": "cat_000003",
+              "share": 0.03801047722166611
+            },
+            {
+              "category_id": "cat_000005",
+              "share": 0.037165719312845756
+            },
+            {
+              "category_id": "cat_000011",
+              "share": 0.033437896710831715
+            },
+            {
+              "category_id": "cat_000012",
+              "share": 0.03323243530591491
+            },
+            {
+              "category_id": "cat_000007",
+              "share": 0.02820542165390368
+            },
+            {
+              "category_id": "cat_000010",
+              "share": 0.025859872812079684
+            },
+            {
+              "category_id": "cat_000149",
+              "share": 0.02429515658345147
+            },
+            {
+              "category_id": "cat_000018",
+              "share": 0.02402927324755235
+            },
+            {
+              "category_id": "cat_000001",
+              "share": 0.023974138357731045
+            },
+            {
+              "category_id": "cat_000150",
+              "share": 0.02315513844419892
+            },
+            {
+              "category_id": "cat_000002",
+              "share": 0.022972673757567945
+            },
+            {
+              "category_id": "cat_000004",
+              "share": 0.020610682564337002
+            },
+            {
+              "category_id": "cat_000019",
+              "share": 0.020291451570046196
+            },
+            {
+              "category_id": "cat_000026",
+              "share": 0.02019341690482007
+            },
+            {
+              "category_id": "cat_000006",
+              "share": 0.01974822564312439
+            },
+            {
+              "category_id": "cat_000020",
+              "share": 0.01966783222298922
+            },
+            {
+              "category_id": "cat_000008",
+              "share": 0.019296687976834523
+            },
+            {
+              "category_id": "cat_000009",
+              "share": 0.018552711790599297
+            },
+            {
+              "category_id": "cat_000016",
+              "share": 0.017211622561329156
+            },
+            {
+              "category_id": "cat_000022",
+              "share": 0.01599011164576121
+            },
+            {
+              "category_id": "cat_000151",
+              "share": 0.01476440238047993
+            },
+            {
+              "category_id": "cat_000021",
+              "share": 0.014504680593810815
+            },
+            {
+              "category_id": "cat_000152",
+              "share": 0.014201930166218584
+            },
+            {
+              "category_id": "cat_000025",
+              "share": 0.014005184513977201
+            },
+            {
+              "category_id": "cat_000013",
+              "share": 0.013791053570226027
+            },
+            {
+              "category_id": "cat_000031",
+              "share": 0.01218391481297455
+            },
+            {
+              "category_id": "cat_000024",
+              "share": 0.012170880732344624
+            },
+            {
+              "category_id": "cat_000153",
+              "share": 0.012003954561037092
+            },
+            {
+              "category_id": "cat_000154",
+              "share": 0.011591586679943144
+            },
+            {
+              "category_id": "cat_000155",
+              "share": 0.011346437361574105
+            },
+            {
+              "category_id": "cat_000023",
+              "share": 0.01130751019904367
+            },
+            {
+              "category_id": "cat_000027",
+              "share": 0.010790216458041717
+            }
+          ]
+        },
+        "service_status": {
+          "distinct_count": {
+            "hi": 5,
+            "lo": 3
+          },
+          "tail_distinct_count": {
+            "hi": 1,
+            "lo": 0
+          },
+          "tail_share_sum": 3.602902145960485e-06,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000132",
+              "share": 0.9071274634774548
+            },
+            {
+              "category_id": "cat_000133",
+              "share": 0.041913466278336975
+            },
+            {
+              "category_id": "cat_000134",
+              "share": 0.039390583374965635
+            },
+            {
+              "category_id": "cat_000135",
+              "share": 0.011564883967096647
+            }
+          ]
+        },
+        "transporter_type": {
+          "distinct_count": {
+            "hi": 12,
+            "lo": 13
+          },
+          "tail_distinct_count": {
+            "hi": 2,
+            "lo": 3
+          },
+          "tail_share_sum": 0.00409529818017218,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000139",
+              "share": 0.23001075806673305
+            },
+            {
+              "category_id": "cat_000140",
+              "share": 0.22306516347285094
+            },
+            {
+              "category_id": "cat_000142",
+              "share": 0.1518688211661269
+            },
+            {
+              "category_id": "cat_000138",
+              "share": 0.14751591015014728
+            },
+            {
+              "category_id": "cat_000141",
+              "share": 0.12701525029914887
+            },
+            {
+              "category_id": "cat_000144",
+              "share": 0.0401488716322812
+            },
+            {
+              "category_id": "cat_000143",
+              "share": 0.038999008167430786
+            },
+            {
+              "category_id": "cat_000145",
+              "share": 0.014463608042582671
+            },
+            {
+              "category_id": "cat_000148",
+              "share": 0.01272203411046096
+            },
+            {
+              "category_id": "cat_000147",
+              "share": 0.010095276712065372
+            }
+          ]
+        }
+      },
+      "metric_profiles": {
+        "cumulative_ancillary_ratio_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "cumulative_ancillary_ratio_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "cumulative_load_factor": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.5
+          },
+          "distinct_count": {
+            "hi": 34632,
+            "lo": 1856
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.2418873361736976,
+          "null_rate": null,
+          "scale_decade": -1,
+          "shape": {}
+        },
+        "cumulative_unit_price_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 5713651,
+            "lo": 5835
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9896470857604305,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.6651947493879672
+          }
+        },
+        "cumulative_unit_price_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 2988798,
+            "lo": 5214
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9896470857604305,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.6609401721475727
+          }
+        },
+        "daily_ancillary_ratio_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "daily_ancillary_ratio_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "daily_to_cumulative_ratio": {
+          "bounds": {
+            "lower": null,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 22551,
+            "lo": 590
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.4511913962493577,
+          "null_rate": null,
+          "scale_decade": -1,
+          "shape": {
+            "log_stddev": 1.149962622489888
+          }
+        },
+        "daily_unit_price_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 371811,
+            "lo": 1174
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.8116939297590688,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.7553939771028115
+          }
+        },
+        "daily_unit_price_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 132317,
+            "lo": 789
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.8116779996019791,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.7463236869722266
+          }
+        },
+        "final_forecast_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1734660,
+            "lo": 4079
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9989214420798406,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 1.4379470913240804
+          }
+        },
+        "unconstrained_demand_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 3948876,
+            "lo": 5441
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9991762302452479,
+          "null_rate": null,
+          "scale_decade": 1,
+          "shape": {
+            "log_stddev": 1.5755758674742295
+          }
+        },
+        "unconstrained_forecast_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1929658,
+            "lo": 4085
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9989220247085552,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 1.440530404531396
+          }
+        }
+      },
+      "numeric_profiles": {
+        "physical_availability_end_day": {
+          "distinct_count": {
+            "hi": 1185,
+            "lo": 575
+          }
+        },
+        "physical_availability_start_day": {
+          "distinct_count": {
+            "hi": 1183,
+            "lo": 573
+          }
+        },
+        "physical_inventory_capacity": {
+          "distinct_count": {
+            "hi": 300,
+            "lo": 105
+          }
+        },
+        "physical_inventory_lid": {
+          "distinct_count": {
+            "hi": 300,
+            "lo": 105
+          }
+        }
+      },
+      "pair_structure": {}
+    },
+    "fact_daily_od_bucket": {
+      "array_profiles": {
+        "market_list_alerts": {
+          "null_rate": 0.7184957979400407
+        },
+        "service_labels": {
+          "null_rate": 0.11995248338504759
+        }
+      },
+      "bool_profiles": {
+        "has_pricing_changed_bucket": {
+          "true_rate": {
+            "hi": 0.01866354497771704,
+            "lo": 0.03574419181439344
+          }
+        },
+        "has_pricing_changed_day_x": {
+          "true_rate": {
+            "hi": 0.007157049590252217,
+            "lo": 0.003558212004606767
+          }
+        },
+        "is_first_available_end_day": {
+          "true_rate": {
+            "hi": 0.09520294868397622,
+            "lo": 0.07670169217659929
+          }
+        },
+        "is_first_available_start_day": {
+          "true_rate": {
+            "hi": 0.09515587614836875,
+            "lo": 0.07663416227313022
+          }
+        },
+        "is_last": {
+          "true_rate": {
+            "hi": 0.0,
+            "lo": 0.0
+          }
+        },
+        "is_optim_current": {
+          "true_rate": {
+            "hi": 0.005963802948312392,
+            "lo": 0.005356963069737517
+          }
+        }
+      },
+      "category_distributions": {
+        "bucket_name": {
+          "distinct_count": {
+            "hi": 158,
+            "lo": 158
+          },
+          "tail_distinct_count": {
+            "hi": 126,
+            "lo": 126
+          },
+          "tail_share_sum": 0.5510341444041498,
+          "tail_zipf_exponent": 2.1752014214051267,
+          "top_values": [
+            {
+              "category_id": "cat_000100",
+              "share": 0.014030276672670493
+            },
+            {
+              "category_id": "cat_000101",
+              "share": 0.014030259659221856
+            },
+            {
+              "category_id": "cat_000102",
+              "share": 0.014030252897466627
+            },
+            {
+              "category_id": "cat_000103",
+              "share": 0.01403019291415412
+            },
+            {
+              "category_id": "cat_000104",
+              "share": 0.014030187679246848
+            },
+            {
+              "category_id": "cat_000105",
+              "share": 0.014030187170297529
+            },
+            {
+              "category_id": "cat_000106",
+              "share": 0.014030184843672074
+            },
+            {
+              "category_id": "cat_000107",
+              "share": 0.014030184189308665
+            },
+            {
+              "category_id": "cat_000108",
+              "share": 0.01403018026312821
+            },
+            {
+              "category_id": "cat_000109",
+              "share": 0.014030179972300027
+            },
+            {
+              "category_id": "cat_000110",
+              "share": 0.014030179717825369
+            },
+            {
+              "category_id": "cat_000111",
+              "share": 0.014030179681471846
+            },
+            {
+              "category_id": "cat_000112",
+              "share": 0.014030178300037981
+            },
+            {
+              "category_id": "cat_000113",
+              "share": 0.014030177027664686
+            },
+            {
+              "category_id": "cat_000114",
+              "share": 0.014030176918604118
+            },
+            {
+              "category_id": "cat_000115",
+              "share": 0.01403017666412946
+            },
+            {
+              "category_id": "cat_000116",
+              "share": 0.014030175646230823
+            },
+            {
+              "category_id": "cat_000117",
+              "share": 0.014030175100927982
+            },
+            {
+              "category_id": "cat_000118",
+              "share": 0.014030174482918096
+            },
+            {
+              "category_id": "cat_000119",
+              "share": 0.014030172338060254
+            },
+            {
+              "category_id": "cat_000120",
+              "share": 0.014030169429778435
+            },
+            {
+              "category_id": "cat_000121",
+              "share": 0.014030166994092413
+            },
+            {
+              "category_id": "cat_000122",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000123",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000124",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000125",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000126",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000127",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000128",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000129",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000130",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000131",
+              "share": 0.01403016670326423
+            }
+          ]
+        },
+        "cabin_name": {
+          "distinct_count": {
+            "hi": 7,
+            "lo": 7
+          },
+          "tail_distinct_count": {
+            "hi": 4,
+            "lo": 4
+          },
+          "tail_share_sum": 0.01329075550003711,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000065",
+              "share": 0.4893141998682337
+            },
+            {
+              "category_id": "cat_000066",
+              "share": 0.41115118335928497
+            },
+            {
+              "category_id": "cat_000067",
+              "share": 0.08624386127244421
+            }
+          ]
+        },
+        "family_name": {
+          "distinct_count": {
+            "hi": 77,
+            "lo": 77
+          },
+          "tail_distinct_count": {
+            "hi": 45,
+            "lo": 45
+          },
+          "tail_share_sum": 0.03382656490065428,
+          "tail_zipf_exponent": 1.7337077620883616,
+          "top_values": [
+            {
+              "category_id": "cat_000068",
+              "share": 0.2806037503131199
+            },
+            {
+              "category_id": "cat_000069",
+              "share": 0.27718815519392814
+            },
+            {
+              "category_id": "cat_000070",
+              "share": 0.014030252897466627
+            },
+            {
+              "category_id": "cat_000071",
+              "share": 0.014030179717825369
+            },
+            {
+              "category_id": "cat_000072",
+              "share": 0.014030172338060254
+            },
+            {
+              "category_id": "cat_000073",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000074",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000075",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000076",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000077",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000078",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000079",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000080",
+              "share": 0.01403016670326423
+            },
+            {
+              "category_id": "cat_000081",
+              "share": 0.014030147181422524
+            },
+            {
+              "category_id": "cat_000082",
+              "share": 0.01403014579998866
+            },
+            {
+              "category_id": "cat_000083",
+              "share": 0.013859470373186283
+            },
+            {
+              "category_id": "cat_000084",
+              "share": 0.013859397666140819
+            },
+            {
+              "category_id": "cat_000085",
+              "share": 0.013859389850133432
+            },
+            {
+              "category_id": "cat_000086",
+              "share": 0.013859387014558659
+            },
+            {
+              "category_id": "cat_000087",
+              "share": 0.013859386723730478
+            },
+            {
+              "category_id": "cat_000088",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000089",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000090",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000091",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000092",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000093",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000094",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000095",
+              "share": 0.013859379380318886
+            },
+            {
+              "category_id": "cat_000096",
+              "share": 0.013738078253838479
+            },
+            {
+              "category_id": "cat_000097",
+              "share": 0.013282099762628213
+            },
+            {
+              "category_id": "cat_000098",
+              "share": 0.00993003013413807
+            },
+            {
+              "category_id": "cat_000099",
+              "share": 0.008867023210515364
+            }
+          ]
+        },
+        "market_name": {
+          "distinct_count": {
+            "hi": 412,
+            "lo": 364
+          },
+          "tail_distinct_count": {
+            "hi": 380,
+            "lo": 332
+          },
+          "tail_share_sum": 0.5684020772242642,
+          "tail_zipf_exponent": 0.5420201340367987,
+          "top_values": [
+            {
+              "category_id": "cat_000033",
+              "share": 0.06921420041703379
+            },
+            {
+              "category_id": "cat_000034",
+              "share": 0.04087807330057358
+            },
+            {
+              "category_id": "cat_000035",
+              "share": 0.03762773929627614
+            },
+            {
+              "category_id": "cat_000036",
+              "share": 0.023257280208575017
+            },
+            {
+              "category_id": "cat_000037",
+              "share": 0.02178737892024557
+            },
+            {
+              "category_id": "cat_000038",
+              "share": 0.018318575512810457
+            },
+            {
+              "category_id": "cat_000039",
+              "share": 0.012691459898151953
+            },
+            {
+              "category_id": "cat_000040",
+              "share": 0.01247459517586117
+            },
+            {
+              "category_id": "cat_000041",
+              "share": 0.012447375984665164
+            },
+            {
+              "category_id": "cat_000042",
+              "share": 0.010044598079259255
+            },
+            {
+              "category_id": "cat_000043",
+              "share": 0.009888479475443178
+            },
+            {
+              "category_id": "cat_000044",
+              "share": 0.009808270335261358
+            },
+            {
+              "category_id": "cat_000045",
+              "share": 0.009681126943203314
+            },
+            {
+              "category_id": "cat_000046",
+              "share": 0.009676297995718302
+            },
+            {
+              "category_id": "cat_000047",
+              "share": 0.00863451313170713
+            },
+            {
+              "category_id": "cat_000048",
+              "share": 0.008453448231643273
+            },
+            {
+              "category_id": "cat_000049",
+              "share": 0.008432966693289783
+            },
+            {
+              "category_id": "cat_000050",
+              "share": 0.00841111488160397
+            },
+            {
+              "category_id": "cat_000051",
+              "share": 0.008375494827546952
+            },
+            {
+              "category_id": "cat_000052",
+              "share": 0.008347906938923401
+            },
+            {
+              "category_id": "cat_000053",
+              "share": 0.008130543191826082
+            },
+            {
+              "category_id": "cat_000054",
+              "share": 0.007540022930439609
+            },
+            {
+              "category_id": "cat_000055",
+              "share": 0.007531738507911907
+            },
+            {
+              "category_id": "cat_000056",
+              "share": 0.007525398417193984
+            },
+            {
+              "category_id": "cat_000057",
+              "share": 0.007371157363766427
+            },
+            {
+              "category_id": "cat_000058",
+              "share": 0.007097798031130886
+            },
+            {
+              "category_id": "cat_000059",
+              "share": 0.00682217623700814
+            },
+            {
+              "category_id": "cat_000060",
+              "share": 0.006647197171124221
+            },
+            {
+              "category_id": "cat_000061",
+              "share": 0.006631001785807839
+            },
+            {
+              "category_id": "cat_000062",
+              "share": 0.006380296841579458
+            },
+            {
+              "category_id": "cat_000063",
+              "share": 0.005754705173501033
+            },
+            {
+              "category_id": "cat_000064",
+              "share": 0.005714990876653408
+            }
+          ]
+        },
+        "od_status": {
+          "distinct_count": {
+            "hi": 2,
+            "lo": 2
+          },
+          "tail_distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "tail_share_sum": 0.0,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000136",
+              "share": 0.9310657481006575
+            },
+            {
+              "category_id": "cat_000137",
+              "share": 0.06893425189934256
+            }
+          ]
+        },
+        "route_name": {
+          "distinct_count": {
+            "hi": 102,
+            "lo": 98
+          },
+          "tail_distinct_count": {
+            "hi": 70,
+            "lo": 66
+          },
+          "tail_share_sum": 0.32143587792316064,
+          "tail_zipf_exponent": 1.0019872015984312,
+          "top_values": [
+            {
+              "category_id": "cat_000001",
+              "share": 0.04545068853416097
+            },
+            {
+              "category_id": "cat_000002",
+              "share": 0.041435468995470945
+            },
+            {
+              "category_id": "cat_000003",
+              "share": 0.03510000459049746
+            },
+            {
+              "category_id": "cat_000004",
+              "share": 0.03412042013128435
+            },
+            {
+              "category_id": "cat_000005",
+              "share": 0.03396737398179546
+            },
+            {
+              "category_id": "cat_000006",
+              "share": 0.03282431332930061
+            },
+            {
+              "category_id": "cat_000007",
+              "share": 0.031276394109372
+            },
+            {
+              "category_id": "cat_000008",
+              "share": 0.029459293958003566
+            },
+            {
+              "category_id": "cat_000009",
+              "share": 0.027716368080275892
+            },
+            {
+              "category_id": "cat_000010",
+              "share": 0.027660874136997842
+            },
+            {
+              "category_id": "cat_000011",
+              "share": 0.02708857869633425
+            },
+            {
+              "category_id": "cat_000012",
+              "share": 0.026808414275071524
+            },
+            {
+              "category_id": "cat_000013",
+              "share": 0.017358636460928008
+            },
+            {
+              "category_id": "cat_000014",
+              "share": 0.017187130028949508
+            },
+            {
+              "category_id": "cat_000015",
+              "share": 0.016966606688131013
+            },
+            {
+              "category_id": "cat_000016",
+              "share": 0.016878963761499888
+            },
+            {
+              "category_id": "cat_000017",
+              "share": 0.01660424680655793
+            },
+            {
+              "category_id": "cat_000018",
+              "share": 0.0159387097786414
+            },
+            {
+              "category_id": "cat_000019",
+              "share": 0.015897440787040633
+            },
+            {
+              "category_id": "cat_000020",
+              "share": 0.0149722058985635
+            },
+            {
+              "category_id": "cat_000021",
+              "share": 0.014848440512191205
+            },
+            {
+              "category_id": "cat_000022",
+              "share": 0.014730929494930232
+            },
+            {
+              "category_id": "cat_000023",
+              "share": 0.014389075544924395
+            },
+            {
+              "category_id": "cat_000024",
+              "share": 0.014183027013544916
+            },
+            {
+              "category_id": "cat_000025",
+              "share": 0.013959277006755805
+            },
+            {
+              "category_id": "cat_000026",
+              "share": 0.013158792648763473
+            },
+            {
+              "category_id": "cat_000027",
+              "share": 0.013065374274329493
+            },
+            {
+              "category_id": "cat_000028",
+              "share": 0.011872233590575884
+            },
+            {
+              "category_id": "cat_000029",
+              "share": 0.011308655579249248
+            },
+            {
+              "category_id": "cat_000030",
+              "share": 0.010980103128736263
+            },
+            {
+              "category_id": "cat_000031",
+              "share": 0.010754797336588327
+            },
+            {
+              "category_id": "cat_000032",
+              "share": 0.01060128291737313
+            }
+          ]
+        },
+        "service_status": {
+          "distinct_count": {
+            "hi": 4,
+            "lo": 3
+          },
+          "tail_distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "tail_share_sum": 0.0,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000132",
+              "share": 0.9024690936089549
+            },
+            {
+              "category_id": "cat_000133",
+              "share": 0.056987622024162604
+            },
+            {
+              "category_id": "cat_000134",
+              "share": 0.029724635012251324
+            },
+            {
+              "category_id": "cat_000135",
+              "share": 0.010818649354631131
+            }
+          ]
+        },
+        "transporter_type": {
+          "distinct_count": {
+            "hi": 12,
+            "lo": 13
+          },
+          "tail_distinct_count": {
+            "hi": 1,
+            "lo": 2
+          },
+          "tail_share_sum": 0.0018586565175664482,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000138",
+              "share": 0.24247221895474944
+            },
+            {
+              "category_id": "cat_000139",
+              "share": 0.18581631035625484
+            },
+            {
+              "category_id": "cat_000140",
+              "share": 0.18362071135866423
+            },
+            {
+              "category_id": "cat_000141",
+              "share": 0.14372950452779568
+            },
+            {
+              "category_id": "cat_000142",
+              "share": 0.117583330161543
+            },
+            {
+              "category_id": "cat_000143",
+              "share": 0.04254871456077209
+            },
+            {
+              "category_id": "cat_000144",
+              "share": 0.028107407801234812
+            },
+            {
+              "category_id": "cat_000145",
+              "share": 0.017308239426951026
+            },
+            {
+              "category_id": "cat_000146",
+              "share": 0.01422109598630723
+            },
+            {
+              "category_id": "cat_000147",
+              "share": 0.011506564447828542
+            },
+            {
+              "category_id": "cat_000148",
+              "share": 0.011227245900332737
+            }
+          ]
+        }
+      },
+      "metric_profiles": {
+        "availability_end_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 200.0
+          },
+          "distinct_count": {
+            "hi": 200,
+            "lo": 200
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.14618409730993748,
+          "null_rate": 1.941350820877652e-06,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "availability_start_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 200.0
+          },
+          "distinct_count": {
+            "hi": 200,
+            "lo": 200
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.14606741043751437,
+          "null_rate": 0.003610761696137277,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "bucket_authorization_end_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 200.0
+          },
+          "distinct_count": {
+            "hi": 200,
+            "lo": 94
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.22820482659150806,
+          "null_rate": 0.7540978696906859,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "bucket_authorization_start_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 200.0
+          },
+          "distinct_count": {
+            "hi": 200,
+            "lo": 97
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.22682102272419297,
+          "null_rate": 0.754965782635348,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "confirmed_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "distinct_count": {
+            "hi": 1903,
+            "lo": 14
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.0018777660012649392,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {}
+        },
+        "cumul_availability_end_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 300.0
+          },
+          "distinct_count": {
+            "hi": 300,
+            "lo": 298
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.215652028028696,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "cumul_availability_start_day": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 300.0
+          },
+          "distinct_count": {
+            "hi": 300,
+            "lo": 297
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.21404371542852377,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {}
+        },
+        "cumulative_ancillary_ratio_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "cumulative_ancillary_ratio_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "cumulative_sum_net_bookings": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 648,
+            "lo": 113
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.01878762971178389,
+          "null_rate": 0.0,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 0.9986785042842884
+          }
+        },
+        "cumulative_unit_price_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 994028,
+            "lo": 5259
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9346864416777723,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.8454936939774341
+          }
+        },
+        "cumulative_unit_price_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 334974,
+            "lo": 3057
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9346864416777723,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.8411076854716621
+          }
+        },
+        "daily_ancillary_ratio_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "daily_ancillary_ratio_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "daily_unit_price_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 106485,
+            "lo": 588
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.6789535174106919,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.8514505225675495
+          }
+        },
+        "daily_unit_price_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 36432,
+            "lo": 392
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.6789512297691097,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.8477126557620811
+          }
+        },
+        "last_observed_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 31315,
+            "lo": 802
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.815843568381485,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 1.1096974901689434
+          },
+          "target_null_rate": 0.7339434883213855
+        },
+        "last_predicted_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 2407759,
+            "lo": 4615
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.7958449763791846,
+          "null_rate": null,
+          "scale_decade": -1,
+          "shape": {
+            "log_stddev": 1.17049891528031
+          },
+          "target_null_rate": 0.7339434883213855
+        },
+        "market_cabin_max_leg_cumulative_sum_net_bookings": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 810,
+            "lo": 224
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.7131328227681882,
+          "null_rate": 0.0,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 1.413544066023728
+          }
+        },
+        "market_cabin_max_leg_load_factor": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.5
+          },
+          "distinct_count": {
+            "hi": 150,
+            "lo": 89
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.7063002393778002,
+          "null_rate": 0.0001035699138891566,
+          "scale_decade": -1,
+          "shape": {}
+        },
+        "od_cabin_forecasted_traffic": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 54737,
+            "lo": 2511
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.4553910781002946,
+          "null_rate": 0.21978545951691886,
+          "scale_decade": 1,
+          "shape": {
+            "log_stddev": 1.833483998609876
+          }
+        },
+        "optim_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 3744645,
+            "lo": 3114
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9970806300348843,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 0.6602573072530086
+          }
+        },
+        "price_vat_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 428,
+            "lo": 417
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9999718621373541,
+          "null_rate": 0.41338993409741864,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.8634003266505387
+          }
+        },
+        "service_budget_objective": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": null,
+          "null_rate": 1.0,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "service_max_leg_cumulative_sum_net_bookings": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1102,
+            "lo": 253
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.7396449716104256,
+          "null_rate": 0.0,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 1.439834250311035
+          }
+        },
+        "service_max_leg_load_factor": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.5
+          },
+          "distinct_count": {
+            "hi": 150,
+            "lo": 68
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.7304635033337821,
+          "null_rate": 0.0,
+          "scale_decade": -1,
+          "shape": {}
+        },
+        "service_yield_objective": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": null,
+          "null_rate": 1.0,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "sum_net_bookings": {
+          "bounds": {
+            "lower": null,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 297,
+            "lo": 11
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.002685624089687024,
+          "null_rate": 0.0,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 0.6080549455270523
+          }
+        },
+        "unconstrained_demand_bookings": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 83584,
+            "lo": 5235
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.5142304372222685,
+          "null_rate": 0.23145663867765398,
+          "scale_decade": 1,
+          "shape": {
+            "log_stddev": 1.5143644432982453
+          }
+        },
+        "unconstrained_demand_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 11591959,
+            "lo": 7195
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9992755047739131,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 1.0819196490342804
+          }
+        },
+        "unconstrained_demand_revenue": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1404849,
+            "lo": 9039
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.5111386544001838,
+          "null_rate": 0.23145663867765398,
+          "scale_decade": 3,
+          "shape": {
+            "log_stddev": 1.718597630750881
+          }
+        },
+        "unconstrained_forecast_bookings": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 60471,
+            "lo": 2500
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.459706041210987,
+          "null_rate": 0.23145663867765398,
+          "scale_decade": 1,
+          "shape": {
+            "log_stddev": 1.8340876540412407
+          }
+        },
+        "unconstrained_forecast_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 811463,
+            "lo": 124
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.99999986745297,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {
+            "log_stddev": 0.6353000055087823
+          }
+        },
+        "unconstrained_forecast_revenue": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1746419,
+            "lo": 4958
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.42550672430149533,
+          "null_rate": 0.23145663867765398,
+          "scale_decade": 3,
+          "shape": {
+            "log_stddev": 1.9461668238009286
+          }
+        }
+      },
+      "numeric_profiles": {
+        "bucket_order": {
+          "distinct_count": {
+            "hi": 134,
+            "lo": 134
+          }
+        },
+        "cabin_capacity": {
+          "distinct_count": {
+            "hi": 277,
+            "lo": 93
+          }
+        },
+        "cabin_lid": {
+          "distinct_count": {
+            "hi": 277,
+            "lo": 93
+          }
+        },
+        "market_rank": {
+          "distinct_count": {
+            "hi": 11,
+            "lo": 11
+          }
+        },
+        "od_rank": {
+          "distinct_count": {
+            "hi": 238,
+            "lo": 237
+          }
+        },
+        "service_capacity": {
+          "distinct_count": {
+            "hi": 247,
+            "lo": 50
+          }
+        },
+        "service_lid": {
+          "distinct_count": {
+            "hi": 248,
+            "lo": 50
+          }
+        }
+      },
+      "pair_structure": {
+        "cabins_per_market": {
+          "1": 0.10589237195344499,
+          "2": 0.646027819457399,
+          "3": 0.22528083052840747,
+          "4": 0.018905876150695486,
+          "5": 0.0032280303337523823,
+          "6": 0.0006650715763007421
+        },
+        "ladder_depth": {
+          "1": 9.624787598437316e-06,
+          "2": 3.022660568104281e-06,
+          "3": 3.977184958031949e-06,
+          "31": 0.0037545421440813203,
+          "33": 0.005260861175086341,
+          "34": 0.16204411716277806,
+          "35": 0.39220667425725675,
+          "36": 0.31092080899760144,
+          "37": 0.05897059635343047,
+          "38": 0.019182917576978018,
+          "39": 0.008217023210692327,
+          "4": 6.363495932851118e-07,
+          "40": 0.0015267617616893045,
+          "41": 0.0003103795141248133,
+          "5": 0.03257728107863801,
+          "6": 7.954369916063897e-08,
+          "7": 0.004865290359160483,
+          "8": 0.00014540588206564804
+        }
+      }
+    },
+    "fact_passenger_event": {
+      "array_profiles": {
+        "service_labels": {
+          "null_rate": 0.00753850704502547
+        }
+      },
+      "bool_profiles": {
+        "is_confirmed": {
+          "true_rate": {
+            "hi": 0.6246630987663324,
+            "lo": 0.7176136363636364
+          }
+        },
+        "is_ticket_exchanged": {
+          "true_rate": {
+            "hi": 0.023388448703125203,
+            "lo": 0.03049242424242424
+          }
+        },
+        "no_show": {
+          "true_rate": {
+            "hi": 0.0,
+            "lo": 0.0
+          }
+        }
+      },
+      "category_distributions": {
+        "bucket_name": {
+          "distinct_count": {
+            "hi": 107,
+            "lo": 58
+          },
+          "tail_distinct_count": {
+            "hi": 75,
+            "lo": 26
+          },
+          "tail_share_sum": 0.11607976707619927,
+          "tail_zipf_exponent": 2.422394570417408,
+          "top_values": [
+            {
+              "category_id": "cat_000100",
+              "share": 0.09879721065848515
+            },
+            {
+              "category_id": "cat_000101",
+              "share": 0.05863166310842859
+            },
+            {
+              "category_id": "cat_000102",
+              "share": 0.04788275467846401
+            },
+            {
+              "category_id": "cat_000103",
+              "share": 0.04314973534828434
+            },
+            {
+              "category_id": "cat_000104",
+              "share": 0.042156214681806164
+            },
+            {
+              "category_id": "cat_000105",
+              "share": 0.034652598180596954
+            },
+            {
+              "category_id": "cat_000106",
+              "share": 0.033644833304573844
+            },
+            {
+              "category_id": "cat_000107",
+              "share": 0.033547993398518494
+            },
+            {
+              "category_id": "cat_000108",
+              "share": 0.033127281605111705
+            },
+            {
+              "category_id": "cat_000109",
+              "share": 0.03233347511587872
+            },
+            {
+              "category_id": "cat_000110",
+              "share": 0.030803869738392296
+            },
+            {
+              "category_id": "cat_000111",
+              "share": 0.029685782164515482
+            },
+            {
+              "category_id": "cat_000112",
+              "share": 0.028346137565520384
+            },
+            {
+              "category_id": "cat_000113",
+              "share": 0.027765605741019366
+            },
+            {
+              "category_id": "cat_000114",
+              "share": 0.027431374428544326
+            },
+            {
+              "category_id": "cat_000115",
+              "share": 0.027083302924104168
+            },
+            {
+              "category_id": "cat_000116",
+              "share": 0.025951012578382907
+            },
+            {
+              "category_id": "cat_000117",
+              "share": 0.02528575619550858
+            },
+            {
+              "category_id": "cat_000118",
+              "share": 0.023639633183944554
+            },
+            {
+              "category_id": "cat_000119",
+              "share": 0.0229460437733572
+            },
+            {
+              "category_id": "cat_000120",
+              "share": 0.019524004512855648
+            },
+            {
+              "category_id": "cat_000121",
+              "share": 0.014736282238310847
+            },
+            {
+              "category_id": "cat_000122",
+              "share": 0.013765117211249386
+            },
+            {
+              "category_id": "cat_000123",
+              "share": 0.013060417317216983
+            },
+            {
+              "category_id": "cat_000124",
+              "share": 0.012769276033543529
+            },
+            {
+              "category_id": "cat_000125",
+              "share": 0.012256127089758918
+            },
+            {
+              "category_id": "cat_000126",
+              "share": 0.012255034170408378
+            },
+            {
+              "category_id": "cat_000127",
+              "share": 0.011930442303010843
+            },
+            {
+              "category_id": "cat_000128",
+              "share": 0.011901933165070716
+            },
+            {
+              "category_id": "cat_000129",
+              "share": 0.011869098967141488
+            },
+            {
+              "category_id": "cat_000130",
+              "share": 0.011838776929804732
+            },
+            {
+              "category_id": "cat_000131",
+              "share": 0.011151444611992032
+            }
+          ]
+        },
+        "cabin_name": {
+          "distinct_count": {
+            "hi": 7,
+            "lo": 7
+          },
+          "tail_distinct_count": {
+            "hi": 3,
+            "lo": 3
+          },
+          "tail_share_sum": 0.007256725501951222,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000066",
+              "share": 0.6210553057282348
+            },
+            {
+              "category_id": "cat_000065",
+              "share": 0.27330263331510524
+            },
+            {
+              "category_id": "cat_000067",
+              "share": 0.092166489677615
+            },
+            {
+              "category_id": "cat_000156",
+              "share": 0.006218845777093784
+            }
+          ]
+        },
+        "event_type": {
+          "distinct_count": {
+            "hi": 3,
+            "lo": 3
+          },
+          "tail_distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "tail_share_sum": 0.0,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000183",
+              "share": 0.6077793139539084
+            },
+            {
+              "category_id": "cat_000184",
+              "share": 0.276088334527965
+            },
+            {
+              "category_id": "cat_000185",
+              "share": 0.11613235151812662
+            }
+          ]
+        },
+        "family_name": {
+          "distinct_count": {
+            "hi": 34,
+            "lo": 22
+          },
+          "tail_distinct_count": {
+            "hi": 21,
+            "lo": 9
+          },
+          "tail_share_sum": 0.019269649547795975,
+          "tail_zipf_exponent": 2.823359782847478,
+          "top_values": [
+            {
+              "category_id": "cat_000068",
+              "share": 0.5282038974788609
+            },
+            {
+              "category_id": "cat_000069",
+              "share": 0.23025368999356088
+            },
+            {
+              "category_id": "cat_000070",
+              "share": 0.04788275467846401
+            },
+            {
+              "category_id": "cat_000071",
+              "share": 0.04314973534828434
+            },
+            {
+              "category_id": "cat_000072",
+              "share": 0.028346137565520384
+            },
+            {
+              "category_id": "cat_000073",
+              "share": 0.027083302924104168
+            },
+            {
+              "category_id": "cat_000074",
+              "share": 0.023639633183944554
+            },
+            {
+              "category_id": "cat_000075",
+              "share": 0.013765117211249386
+            },
+            {
+              "category_id": "cat_000076",
+              "share": 0.01104657097175334
+            },
+            {
+              "category_id": "cat_000077",
+              "share": 0.010312849148237189
+            },
+            {
+              "category_id": "cat_000078",
+              "share": 0.006231484275744568
+            },
+            {
+              "category_id": "cat_000079",
+              "share": 0.005706380555367331
+            },
+            {
+              "category_id": "cat_000080",
+              "share": 0.005108797117112877
+            }
+          ]
+        },
+        "fare_code": {
+          "distinct_count": {
+            "hi": 528,
+            "lo": 122
+          },
+          "tail_distinct_count": {
+            "hi": 505,
+            "lo": 99
+          },
+          "tail_share_sum": 0.11297265951916768,
+          "tail_zipf_exponent": 1.4780669570966054,
+          "top_values": [
+            {
+              "category_id": "cat_000199",
+              "share": 0.1789600065380404
+            },
+            {
+              "category_id": "cat_000200",
+              "share": 0.1648922698000806
+            },
+            {
+              "category_id": "cat_000201",
+              "share": 0.12178882036324848
+            },
+            {
+              "category_id": "cat_000202",
+              "share": 0.05666169410807592
+            },
+            {
+              "category_id": "cat_000203",
+              "share": 0.0563626848410211
+            },
+            {
+              "category_id": "cat_000204",
+              "share": 0.046593389549306266
+            },
+            {
+              "category_id": "cat_000205",
+              "share": 0.04130896391836056
+            },
+            {
+              "category_id": "cat_000206",
+              "share": 0.028322580232789336
+            },
+            {
+              "category_id": "cat_000207",
+              "share": 0.02609132063225685
+            },
+            {
+              "category_id": "cat_000208",
+              "share": 0.023321873357416027
+            },
+            {
+              "category_id": "cat_000209",
+              "share": 0.02075486996834046
+            },
+            {
+              "category_id": "cat_000210",
+              "share": 0.01706655204446207
+            },
+            {
+              "category_id": "cat_000211",
+              "share": 0.015365037186762192
+            },
+            {
+              "category_id": "cat_000212",
+              "share": 0.01463364623389885
+            },
+            {
+              "category_id": "cat_000213",
+              "share": 0.012191613769801744
+            },
+            {
+              "category_id": "cat_000214",
+              "share": 0.011014270284217977
+            },
+            {
+              "category_id": "cat_000215",
+              "share": 0.009844908735691937
+            },
+            {
+              "category_id": "cat_000216",
+              "share": 0.009489704767054186
+            },
+            {
+              "category_id": "cat_000217",
+              "share": 0.007481675238797439
+            },
+            {
+              "category_id": "cat_000218",
+              "share": 0.007239772302736422
+            },
+            {
+              "category_id": "cat_000219",
+              "share": 0.006724515215939161
+            },
+            {
+              "category_id": "cat_000220",
+              "share": 0.005728844968747842
+            },
+            {
+              "category_id": "cat_000221",
+              "share": 0.0051883264237866985
+            }
+          ]
+        },
+        "od_status": {
+          "distinct_count": {
+            "hi": 2,
+            "lo": 1
+          },
+          "tail_distinct_count": {
+            "hi": 1,
+            "lo": 0
+          },
+          "tail_share_sum": 0.003069508023545664,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000136",
+              "share": 0.9969304919764543
+            }
+          ]
+        },
+        "physical_inventory_name": {
+          "distinct_count": {
+            "hi": 35,
+            "lo": 14
+          },
+          "tail_distinct_count": {
+            "hi": 31,
+            "lo": 10
+          },
+          "tail_share_sum": 0.024413264692749292,
+          "tail_zipf_exponent": 2.8826563019065845,
+          "top_values": [
+            {
+              "category_id": "cat_000159",
+              "share": 0.7038093978487804
+            },
+            {
+              "category_id": "cat_000160",
+              "share": 0.25219514923440794
+            },
+            {
+              "category_id": "cat_000161",
+              "share": 0.013363342446968523
+            },
+            {
+              "category_id": "cat_000162",
+              "share": 0.006218845777093784
+            }
+          ]
+        },
+        "route_name": {
+          "distinct_count": {
+            "hi": 102,
+            "lo": 90
+          },
+          "tail_distinct_count": {
+            "hi": 70,
+            "lo": 58
+          },
+          "tail_share_sum": 0.3080091212251951,
+          "tail_zipf_exponent": 1.2565542420424847,
+          "top_values": [
+            {
+              "category_id": "cat_000012",
+              "share": 0.05143174351414263
+            },
+            {
+              "category_id": "cat_000011",
+              "share": 0.05049704884322878
+            },
+            {
+              "category_id": "cat_000003",
+              "share": 0.04188376180105567
+            },
+            {
+              "category_id": "cat_000005",
+              "share": 0.04040100174397814
+            },
+            {
+              "category_id": "cat_000151",
+              "share": 0.03182671793739536
+            },
+            {
+              "category_id": "cat_000152",
+              "share": 0.031319152723752366
+            },
+            {
+              "category_id": "cat_000019",
+              "share": 0.03038694949458074
+            },
+            {
+              "category_id": "cat_000020",
+              "share": 0.028022514304371908
+            },
+            {
+              "category_id": "cat_000177",
+              "share": 0.02466064776470074
+            },
+            {
+              "category_id": "cat_000018",
+              "share": 0.022271375852758093
+            },
+            {
+              "category_id": "cat_000178",
+              "share": 0.02226410353632133
+            },
+            {
+              "category_id": "cat_000026",
+              "share": 0.020907878677415923
+            },
+            {
+              "category_id": "cat_000179",
+              "share": 0.02008978451598067
+            },
+            {
+              "category_id": "cat_000180",
+              "share": 0.019236877506417588
+            },
+            {
+              "category_id": "cat_000007",
+              "share": 0.01874769509265641
+            },
+            {
+              "category_id": "cat_000010",
+              "share": 0.018223839683006563
+            },
+            {
+              "category_id": "cat_000031",
+              "share": 0.017506480571473127
+            },
+            {
+              "category_id": "cat_000016",
+              "share": 0.017178542609760674
+            },
+            {
+              "category_id": "cat_000022",
+              "share": 0.01707072689278688
+            },
+            {
+              "category_id": "cat_000153",
+              "share": 0.016676649181372846
+            },
+            {
+              "category_id": "cat_000181",
+              "share": 0.014561741464115992
+            },
+            {
+              "category_id": "cat_000009",
+              "share": 0.013165068229815518
+            },
+            {
+              "category_id": "cat_000008",
+              "share": 0.013096592429748569
+            },
+            {
+              "category_id": "cat_000149",
+              "share": 0.012955279511637639
+            },
+            {
+              "category_id": "cat_000025",
+              "share": 0.01284199401819859
+            },
+            {
+              "category_id": "cat_000021",
+              "share": 0.01277718027491283
+            },
+            {
+              "category_id": "cat_000154",
+              "share": 0.012728786220447966
+            },
+            {
+              "category_id": "cat_000155",
+              "share": 0.012591446141871934
+            },
+            {
+              "category_id": "cat_000182",
+              "share": 0.012272339590077341
+            },
+            {
+              "category_id": "cat_000150",
+              "share": 0.011953533461611331
+            },
+            {
+              "category_id": "cat_000001",
+              "share": 0.01130454655589361
+            },
+            {
+              "category_id": "cat_000002",
+              "share": 0.011138878629317114
+            }
+          ]
+        },
+        "sale_channel_name": {
+          "distinct_count": {
+            "hi": 19,
+            "lo": 13
+          },
+          "tail_distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "tail_share_sum": 0.0,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000222",
+              "share": 0.8821366817785471
+            },
+            {
+              "category_id": "cat_000223",
+              "share": 0.0391612323625996
+            },
+            {
+              "category_id": "cat_000224",
+              "share": 0.021546340407208077
+            },
+            {
+              "category_id": "cat_000225",
+              "share": 0.019283101261319057
+            },
+            {
+              "category_id": "cat_000226",
+              "share": 0.010948073557678219
+            },
+            {
+              "category_id": "cat_000227",
+              "share": 0.008184976610438158
+            },
+            {
+              "category_id": "cat_000228",
+              "share": 0.006232572015382545
+            },
+            {
+              "category_id": "cat_000229",
+              "share": 0.003011899260433389
+            },
+            {
+              "category_id": "cat_000230",
+              "share": 0.0026266529589372175
+            },
+            {
+              "category_id": "cat_000231",
+              "share": 0.0020525491577253864
+            },
+            {
+              "category_id": "cat_000232",
+              "share": 0.0019422471787219314
+            },
+            {
+              "category_id": "cat_000233",
+              "share": 0.0012861588870819863
+            },
+            {
+              "category_id": "cat_000234",
+              "share": 0.0006960083363537101
+            },
+            {
+              "category_id": "cat_000235",
+              "share": 0.00040608428513227843
+            },
+            {
+              "category_id": "cat_000236",
+              "share": 0.0003386806855656215
+            },
+            {
+              "category_id": "cat_000237",
+              "share": 7.359853579056549e-05
+            },
+            {
+              "category_id": "cat_000238",
+              "share": 4.913993307376274e-05
+            },
+            {
+              "category_id": "cat_000239",
+              "share": 2.2065575513252797e-05
+            },
+            {
+              "category_id": "cat_000240",
+              "share": 1.4192412419322221e-06
+            },
+            {
+              "category_id": "cat_000241",
+              "share": 4.920726933706609e-07
+            },
+            {
+              "category_id": "cat_000242",
+              "share": 2.5898562808982155e-08
+            }
+          ]
+        },
+        "sale_channel_type": {
+          "distinct_count": {
+            "hi": 20,
+            "lo": 13
+          },
+          "tail_distinct_count": {
+            "hi": 15,
+            "lo": 8
+          },
+          "tail_share_sum": 0.01427426741693627,
+          "tail_zipf_exponent": 3.3023508348229256,
+          "top_values": [
+            {
+              "category_id": "cat_000243",
+              "share": 0.5527043574528755
+            },
+            {
+              "category_id": "cat_000244",
+              "share": 0.39894881670139887
+            },
+            {
+              "category_id": "cat_000245",
+              "share": 0.01577714029789128
+            },
+            {
+              "category_id": "cat_000246",
+              "share": 0.009354177587874782
+            },
+            {
+              "category_id": "cat_000247",
+              "share": 0.008941240543023248
+            }
+          ]
+        },
+        "service_status": {
+          "distinct_count": {
+            "hi": 5,
+            "lo": 2
+          },
+          "tail_distinct_count": {
+            "hi": 3,
+            "lo": 0
+          },
+          "tail_share_sum": 0.0030332862936010008,
+          "tail_zipf_exponent": null,
+          "top_values": [
+            {
+              "category_id": "cat_000132",
+              "share": 0.9614492019425207
+            },
+            {
+              "category_id": "cat_000134",
+              "share": 0.03551751176387829
+            }
+          ]
+        },
+        "ticket_category": {
+          "distinct_count": {
+            "hi": 22,
+            "lo": 18
+          },
+          "tail_distinct_count": {
+            "hi": 9,
+            "lo": 5
+          },
+          "tail_share_sum": 0.011809692843770314,
+          "tail_zipf_exponent": 1.684370705559119,
+          "top_values": [
+            {
+              "category_id": "cat_000186",
+              "share": 0.3347610002410327
+            },
+            {
+              "category_id": "cat_000187",
+              "share": 0.2936396921290735
+            },
+            {
+              "category_id": "cat_000188",
+              "share": 0.08187195599299632
+            },
+            {
+              "category_id": "cat_000189",
+              "share": 0.07199428557535102
+            },
+            {
+              "category_id": "cat_000190",
+              "share": 0.04817816922500094
+            },
+            {
+              "category_id": "cat_000191",
+              "share": 0.04513690099434217
+            },
+            {
+              "category_id": "cat_000192",
+              "share": 0.03865898671375757
+            },
+            {
+              "category_id": "cat_000193",
+              "share": 0.02894242607563439
+            },
+            {
+              "category_id": "cat_000194",
+              "share": 0.016856260894165698
+            },
+            {
+              "category_id": "cat_000195",
+              "share": 0.007956385535660958
+            },
+            {
+              "category_id": "cat_000196",
+              "share": 0.0076068637117034975
+            },
+            {
+              "category_id": "cat_000197",
+              "share": 0.0066754322597035775
+            },
+            {
+              "category_id": "cat_000198",
+              "share": 0.005911947807807345
+            }
+          ]
+        }
+      },
+      "metric_profiles": {
+        "ancillary_ratio_exc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "ancillary_ratio_inc": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 0,
+            "lo": 0
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.0,
+          "null_rate": null,
+          "scale_decade": null,
+          "shape": {
+            "log_stddev": null
+          }
+        },
+        "base_price_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 2.0
+          },
+          "distinct_count": {
+            "hi": 4536,
+            "lo": 236
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.9999993718447855,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {}
+        },
+        "bucket_price_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.5
+          },
+          "distinct_count": {
+            "hi": 4213,
+            "lo": 221
+          },
+          "family": "bounded",
+          "non_zero_rate": 0.9999993047921628,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {}
+        },
+        "cabin_capacity": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 265,
+            "lo": 84
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.9999983117670667,
+          "null_rate": 0.002858818035382016,
+          "scale_decade": 3,
+          "shape": {
+            "log_stddev": 0.5830658989051724
+          }
+        },
+        "price_vat_inc_abs": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": null
+          },
+          "distinct_count": {
+            "hi": 1884,
+            "lo": 272
+          },
+          "family": "lognormal",
+          "non_zero_rate": 0.8493289262819476,
+          "null_rate": null,
+          "scale_decade": 2,
+          "shape": {
+            "log_stddev": 0.7792609740374812
+          }
+        },
+        "tax_ratio": {
+          "bounds": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "distinct_count": {
+            "hi": 7422,
+            "lo": 238
+          },
+          "family": "bounded",
+          "non_zero_rate": 1.0,
+          "null_rate": null,
+          "scale_decade": 0,
+          "shape": {}
+        }
+      },
+      "numeric_profiles": {
+        "bucket_order": {
+          "distinct_count": {
+            "hi": 93,
+            "lo": 54
+          }
+        },
+        "cabin_lid": {
+          "distinct_count": {
+            "hi": 266,
+            "lo": 84
+          }
+        },
+        "market_rank": {
+          "distinct_count": {
+            "hi": 11,
+            "lo": 10
+          }
+        },
+        "od_rank": {
+          "distinct_count": {
+            "hi": 118,
+            "lo": 25
+          }
+        }
+      },
+      "pair_structure": {}
+    }
+  }
+}
